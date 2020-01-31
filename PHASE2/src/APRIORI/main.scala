@@ -31,13 +31,13 @@ object main {
    var tt=sorted.combinations(2).toList.map(_.sorted)//.toList.flatten
     //println("v")
  //tt.foreach(println)
-   var v1=tt.map(x=>transactions.map(y=>if(x.intersect(y)==x) 1 else 0)).map(x=>x.count(_==1)).zip(tt).filter(_._1>=Support).map(_._2)
-  println("...................k=2 itemsets.....................")
+   var v1=tt.map(x=>transactions.map(y=>if(x.intersect(y)==x) 1 else 0)).map(x=>x.count(_==1)).zip(tt).filter(_._1>=Support).map(_._2).distinct
+    println("...................k=2 itemsets.....................")
  // var t=v1.flatten
   v1.foreach(println)
   s=s+v1.mkString+"\n...................k=3 itemsets.....................\n"
    tt= v1.map(x=>v1.dropWhile(_==x).map(y=>if(x(x.length-1)==y(1))(x:::y).distinct.sorted else x )).map(x=>x.filter(_.length==3)).flatten
-  v1=tt.map(x=>transactions.map(y=>if(x.intersect(y)==x) 1 else 0)).map(x=>x.count(_==1)).zip(tt).filter(_._1>=Support).map(_._2)
+  v1=tt.map(x=>transactions.map(y=>if(x.intersect(y)==x) 1 else 0)).map(x=>x.count(_==1)).zip(tt).filter(_._1>=Support).map(_._2).distinct
   println("...................k=3 itemsets.....................")
    v1.foreach(println)
    s=s+v1.mkString+"\n...................k=4 itemsets.....................\n"
@@ -49,7 +49,7 @@ object main {
     k=k+1
     i=i+1
     s=s+v1.mkString+"\n...................k="+(k-1)+" itemsets.....................\n"
-    v1=tt.map(x=>transactions.map(y=>if(x.intersect(y)==x) 1 else 0)).map(x=>x.count(_==1)).zip(tt).filter(_._1>=Support).map(_._2)
+    v1=tt.map(x=>transactions.map(y=>if(x.intersect(y)==x) 1 else 0)).map(x=>x.count(_==1)).zip(tt).filter(_._1>=Support).map(_._2).distinct
   println("...................k="+(k-1)+" itemsets.....................")
    v1.foreach(println)
   }
